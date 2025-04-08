@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+	<div th:replace="~{fragment :: meta}"></div>
+
+	<div th:replace="~{fragment :: styles}"></div>
+
+	<title>レビュー登録</title>
+</head>
+
+<body>
+	<div class="samuraitravel-wrapper">
+		<!-- ヘッダー -->
+		<div th:replace="~{fragment :: header}"></div>
+
+		<main>
+			<div class="container pt-4 pb-5 samuraitravel-container">
+				
+				
+>
+				
+				<div class="row justify-content-center">
+					<div class="col-xl-5 col-lg-6 col-md-8">
+
+						<h1 class="mb-4 text-center">レビュー登録</h1>
+
+						<form method="post" th:action="@{/review/__${house.getId()}__}" th:object="${reviewRegisterForm}">
+							
+							<input type="hidden" th:field="*{houseId}">
+							<input type="hidden" th:field="*{userId}">
+
+							<div class="form-group row mb-3">
+								<div class="col-md-5">
+									<label for="score" class="col-form-label text-md-left fw-bold">
+										<div class="d-flex align-items-center">
+											<span class="me-1">点数</span>
+											<span class="badge bg-danger">必須</span>
+										</div>
+									</label>
+								</div>
+								<div class="col-md-7">
+									<div th:if="${#fields.hasErrors('score')}" class="text-danger small mb-2"
+										th:errors="*{score}"></div>
+									<!--										<input type="text" class="form-control" th:field="*{score}" autocomplete="score"-->
+									<!--											autofocus placeholder="侍　太郎">-->
+									<select class="form-select" th:field="*{score}">
+										<!-- valueがない要素があるとエラーになったのでコメントアウトした-->
+<!--										<option selected>aaa</option>-->
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group row mb-3">
+								<div class="col-md-5">
+									<label for="content" class="col-form-label text-md-left fw-bold">
+										<div class="d-flex align-items-center">
+											<span class="me-1">内容</span>
+											<span class="badge bg-danger">必須</span>
+										</div>
+									</label>
+								</div>
+								<div class="col-md-7">
+									<div th:if="${#fields.hasErrors('content')}" class="text-danger small mb-2"
+										th:errors="*{content}"></div>
+									<!--										<input type="text" class="form-control" th:field="*{content}"-->
+									<!--											placeholder="レビュー内容">-->
+									<textarea class="form-control" th:field="*{content}" cols="30" rows="5"></textarea>
+								</div>
+							</div>
+
+							<div class="form-group d-flex justify-content-center my-4">
+								<button type="submit"
+									class="btn text-white shadow-sm w-50 samuraitravel-btn">レビューを投稿する</button>
+							</div>
+						</form>
+
+
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<!-- フッター -->
+		<div th:replace="~{fragment :: footer}"></div>
+	</div>
+
+	<div th:replace="~{fragment :: scripts}"></div>
+</body>
+
+</html>
