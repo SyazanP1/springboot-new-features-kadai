@@ -44,12 +44,12 @@
 						<div sec:authorize="isAuthenticated()">
 							<div th:if="${returnMessage}">
 								<p>
-									<a th:href="@{/houses/__${house.getId()}__/favorite}">&#9825;お気に入り解除</a>
+									<a th:href="@{/houses/__${house.getId()}__/favorite}">&#9829;お気に入り解除</a>
 								</p>
 							</div>
 							<div th:unless="${returnMessage}">
 								<p>
-									<a th:href="@{/houses/__${house.getId()}__/favorite}">&#9829;お気に入り登録</a>
+									<a th:href="@{/houses/__${house.getId()}__/favorite}">&#9825;お気に入り登録</a>
 								</p>
 							</div>
 						</div>

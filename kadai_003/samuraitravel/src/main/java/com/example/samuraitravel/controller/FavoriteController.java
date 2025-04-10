@@ -1,8 +1,6 @@
 package com.example.samuraitravel.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
@@ -32,9 +30,10 @@ public class FavoriteController {
 	public String index(Model model, @AuthenticationPrincipal UserDetailsImpl userDetailsImpl,
 			@PageableDefault(page = 0, size = 6, sort = "id", direction = Direction.ASC) Pageable pageable ) {
 	
-		List<House> favoriteHouses = new ArrayList<House>();
+//		List<House> favoriteHouses = new ArrayList<House>();
 		
-		favoriteHouses = favoriteService.selectFavorites(userDetailsImpl.getUser());
+//		favoriteHouses = favoriteService.selectFavorites(userDetailsImpl.getUser());
+		Page<House> favoriteHouses = favoriteService.selectFavorites(userDetailsImpl.getUser(), pageable);
 		
 		model.addAttribute("favoriteHouses", favoriteHouses);
 		return "favorite/index";

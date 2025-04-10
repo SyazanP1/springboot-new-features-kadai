@@ -1,9 +1,9 @@
 package com.example.samuraitravel.service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -74,17 +74,26 @@ public class FavoriteService {
 
 	}
 	
+//	@Transactional
+//	public List<House> selectFavorites(User user) {
+//		
+//		List<Favorite> favoriteList = favoriteRepository.findAllByUserId(user);
+//		List<House> houseList = new ArrayList<House>();
+//	
+//		for (int i = 0; i < favoriteList.size(); i++) {
+//			houseList.add(favoriteList.get(i).getHouseId());
+//		}
+//		
+//		return houseList;
+//		
+//	}
+
 	@Transactional
-	public List<House> selectFavorites(User user) {
+	public Page<House> selectFavorites(User user, Pageable pageable) {
 		
-		List<Favorite> favoriteList = favoriteRepository.findAllByUserId(user);
-		List<House> houseList = new ArrayList<House>();
-	
-		for (int i = 0; i < favoriteList.size(); i++) {
-			houseList.add(favoriteList.get(i).getHouseId());
-		}
+		Page<Favorite> favoritePage = favoriteRepository.findAllByUserId(user, pageable);
 		
-		return houseList;
+		return favoritePage.map(Favorite::getHouseId);
 		
 	}
 }
